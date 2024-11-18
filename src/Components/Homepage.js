@@ -1,4 +1,4 @@
-function Main() {
+function Homepage() {
     return(
         <main>
             <p>Welome to the Little Lemon Restaurant</p>
@@ -6,4 +6,4 @@ function Main() {
     );
 }
 
-export default Main;
+export default Homepage;
