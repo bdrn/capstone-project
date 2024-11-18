@@ -1,9 +1,16 @@
+import { useNavigate } from 'react-router-dom';
+import CallToAction from './CallToAction';
+import Specials from './Specials';
+import Chicago from './Chicago';
+
 function Homepage() {
-    return(
-        <main>
-            <p>Welome to the Little Lemon Restaurant</p>
-        </main>
-    );
+  return (
+    <main>
+      <CallToAction />
+      <Specials />
+      <Chicago />
+    </main>
+  );
 }
 
 export default Homepage;

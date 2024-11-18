@@ -5,7 +5,6 @@ function Specials({ specials }) {
         <div className="specials-list">
           {specials.map((special, index) => (
             <div key={index} className="special-item">
-              <img src={special.image} alt={special.name} />
               <h3>{special.name}</h3>
               <p>{special.description}</p>
               <span>{special.price}</span>
