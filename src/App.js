@@ -1,42 +1,65 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Suspense, lazy } from 'react';
+import { useReducer } from 'react';
 import './App.css';
+import Nav from './Components/Nav';
+import Header from './Components/Header';
+import CallToAction from './Components/CallToAction';
+import Specials from './Components/Specials';
+import Chicago from './Components/Chicago';
+import BookingPage from './Components/BookingPage';
 import { specialsData } from './data';
 
-// Lazy load components for better performance
-const Nav = lazy(() => import('./Components/Nav'));
-const Header = lazy(() => import('./Components/Header'));
-const CallToAction = lazy(() => import('./Components/CallToAction'));
-const Specials = lazy(() => import('./Components/Specials'));
-const Chicago = lazy(() => import('./Components/Chicago'));
-const BookingPage = lazy(() => import('./Components/BookingPage'));
-const Footer = lazy(() => import('./Components/Footer'));
-const Homepage = lazy(() => import('./Components/Homepage'));
-const Contact = lazy(() => import('./Components/Contact'));
+const updateTimes = (state, action) => {
+  switch (action.type) {
+    case 'UPDATE_TIMES':
+      const selectedDate = new Date(action.date);
+      return [
+        '17:00',
+        '18:00',
+        '19:00',
+        '20:00',
+        '21:00',
+        '22:00'
+      ];
+    default:
+      return state;
+  }
+};
 
+const initializeTimes = () => {
+  return [
+    '17:00',
+    '18:00',
+    '19:00',
+    '20:00',
+    '21:00',
+    '22:00'
+  ];
+};
 
 function App() {
+  const [availableTimes, dispatch] = useReducer(updateTimes, null, initializeTimes);
+
   return (
     <BrowserRouter>
       <div className="app">
-        <Suspense fallback={<div>Loading...</div>}>
-          <Header />
-          <Nav />
-          <Routes>
-            <Route path="/" element={
-              <>
-                <CallToAction />
-                <Specials specials={specialsData} />
-                <Chicago />
-              </>
-            } />
-            <Route path="/booking" element={<BookingPage />} />
-            <Route path="/about" element={<Chicago />} />
-            <Route path="/menu" element={<Specials specials={specialsData} />} />
-            <Route path="/contact" element={<Contact />} />
-          </Routes>
-          <Footer />
-        </Suspense>
+        <Header />
+        <Nav />
+        <Routes>
+          <Route path="/" element={
+            <>
+              <CallToAction />
+              <Specials specials={specialsData} />
+              <Chicago />
+            </>
+          } />
+          <Route
+            path="/booking"
+            element={<BookingPage availableTimes={availableTimes} dispatch={dispatch} />} 
+          />
+          <Route path="/about" element={<Chicago />} />
+          <Route path="/menu" element={<Specials specials={specialsData} />} />
+        </Routes>
       </div>
     </BrowserRouter>
   );
