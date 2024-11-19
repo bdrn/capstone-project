@@ -6,13 +6,11 @@
   box-sizing: border-box;
 }
 
-/* Set the base font size and family */
 html {
   font-size: 16px;
   font-family: 'Arial', sans-serif;
 }
 
-/* Body styling */
 body {
   background-color: #f4f4f4;
   color: #333;
