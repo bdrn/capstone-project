@@ -16,6 +16,8 @@ function BookingPage() {
         <input type="number" name="guests" min="1" />
         <label>Date</label>
         <input type="date" name="date" />
+        <label>Occasion</label>
+        <input type="text" name="occasion" />
         <label>Time</label>
         <input type="time" name="time" />
         <button type="submit">Book Now</button>
