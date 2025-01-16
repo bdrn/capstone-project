@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function BookingPage({ availableTimes, dispatch }) {
+function BookingPage({ availableTimes = [], onDateChange }) {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     guests: 1,
@@ -10,13 +10,20 @@ function BookingPage({ availableTimes, dispatch }) {
     time: ''
   });
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Here you would typically submit the form data to your API
+    // For now, we'll just navigate to the confirmation page
+    navigate('/booking-confirmed'); // Changed from '/confirmed-booking' to '/booking-confirmed'
+  };
+
   const handleDateChange = (e) => {
     const selectedDate = e.target.value;
     setFormData({
       ...formData,
       date: selectedDate
     });
-    dispatch({ type: 'UPDATE_TIMES', date: selectedDate });
+    onDateChange(selectedDate);
   };
 
   const handleInputChange = (e) => {
@@ -24,11 +31,6 @@ function BookingPage({ availableTimes, dispatch }) {
       ...formData,
       [e.target.name]: e.target.value
     });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    navigate('/booking-confirmation');
   };
 
   return (
