@@ -10,6 +10,7 @@ import BookingPage from './Components/BookingPage';
 import { specialsData } from './data';
 import { fetchAPI } from './api';
 import ConfirmedBooking from './Components/ConfirmedBooking';
+import Contact from './Components/Contact';
 
 // Modified to return a Promise that resolves to an array
 export const initializeTimes = async () => {
@@ -98,6 +99,7 @@ function App() {
           />
           <Route path="/booking-confirmed" element={<ConfirmedBooking />} />
           <Route path="/about" element={<Chicago />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/menu" element={<Specials specials={specialsData} />} />
         </Routes>
       </div>
